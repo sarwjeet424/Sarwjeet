@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database</title>
+    <link rel="stylesheet" href="commonStyles.css" />
+  </head>
+
+  <body>
+    <div id="links">
+      <div><a href="index.html">Home</a></div>
+      <div><a href="applied.html">Applied Jobs</a></div>
+      <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Job applied</th>
+            <th>Salary expected</th>
+            <th>Add to bookmark</th>
+          </tr>
+        </thead>
+        <tbody id="body">
+          <!-- Append your output to tbody -->
+        </tbody>
+      </table>
+    </main>
+  </body>
+  <script>
+    var arr=JSON.parse(localStorage.getItem("jobList"))
+
+    var bookmarkel=JSON.parse(localStorage.getItem("bookmarks"))||[]
+
+    arr.forEach(function(el,ind){
+      var a=document.createElement("tr")
+      var b=document.createElement("td")
+      b.innerText=el.names
+      var c=document.createElement("td")
+      c.innerText=el.emails
+      var d=document.createElement("td")
+      d.innerText=el.roles
+      var e=document.createElement("td")
+      e.innerText=el.salarys
+      var f=document.createElement("td")
+      f.innerText="Bookmark"
+      f.style.color="blue"
+      f.style.cursor="pointer"
+      f.addEventListener("click",function(){
+        mybookmark(el)
+      })
+
+      a.append(b,c,d,e,f)
+     // localStorage.setItem("jobList",JSON.stringify(arr))
+      document.querySelector("#body").append(a)
+    })
+
+    function  mybookmark(el){
+        bookmarkel.push(el)
+        console.log(el)
+        localStorage.setItem("bookmarks",JSON.stringify(bookmarkel))
+      }
+
+
+
+  </script>
+</html>
