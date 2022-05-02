@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database</title>
+    <link rel="stylesheet" href="commonStyless.css" />
+  </head>
+
+  <body>
+    <div id="links">
+      <div><a href="indexs.html">Home</a></div>
+      <div><a href="applieds.html">Applied Jobs</a></div>
+      <div><a href="bookmarks.html">Bookmarks</a></div>
+    </div>
+    <select  id="salaryor"  onChange="onchangefun()">
+      <option value="Order Of Salary">Order Of Salary</option>
+      <option value="HTL">HTL</option>
+      <option value="LTH">LTH</option>
+    </select>
+    <select  id="nameor" onChange="onchangenam()">
+      <option value="Order Of Name">Order Of Name</option>
+      <option value="Ascending">Ascending</option>
+      <option value="Dscending">Dscending</option>
+    </select>
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Job applied</th>
+            <th>Salary expected</th>
+            <th>Add to bookmark</th>
+          </tr>
+        </thead>
+        <tbody id="body">
+          <!-- Append your output to tbody -->
+        </tbody>
+      </table>
+    </main>
+  </body>
+  <script>
+    var arr=JSON.parse(localStorage.getItem("jobList"))
+
+    displayarr(arr)
+
+    var bookmarkel=JSON.parse(localStorage.getItem("bookmarks"))||[]
+
+    function displayarr(arr){
+      document.querySelector("tbody").innerHTML=""
+      arr.forEach(function(el,ind){
+
+      var a=document.createElement("tr")
+      var b=document.createElement("td")
+      b.innerText=el.names
+      var c=document.createElement("td")
+      c.innerText=el.emails
+      var d=document.createElement("td")
+      d.innerText=el.roles
+      var e=document.createElement("td")
+      e.innerText=el.salarys
+      var f=document.createElement("td")
+      f.innerText="Bookmark"
+      f.style.color="blue"
+      f.style.cursor="pointer"
+      f.addEventListener("click",function(){
+        mybookmark(el)
+      })
+
+      a.append(b,c,d,e,f)   
+      document.querySelector("#body").append(a)   
+    })
+  }
+
+    function  mybookmark(el){
+        bookmarkel.push(el)
+        localStorage.setItem("bookmarks",JSON.stringify(bookmarkel))
+      }
+
+      function onchangefun(){
+        var va = document.querySelector("#salaryor").value
+       
+         if(va=="HTL"){
+              arr.sort(function(a,b){
+              return b.salarys-a.salarys                   
+            })  
+
+        }
+           else if(va=="LTH"){
+               arr.sort(function(a,b){
+                return a.salarys-b.salarys
+            })
+         
+        }
+           displayarr(arr)
+
+      }
+
+      function onchangenam(){
+
+        var na=document.querySelector("#nameor").value
+        if(na=="Ascending")
+        {
+          arr.sort(function(a,b){
+            var i=a.names.toUpperCase();
+            var j=b.names.toUpperCase();
+
+          if(i>j){
+            return 1;
+          }
+          else if(i<j){
+              return -1;
+          }
+          else{
+            return 0
+          }
+        })
+      }
+       else if(na=="Dscending")
+        {
+          arr.sort(function(a,b){
+            var i=a.names.toUpperCase();
+            var j=b.names.toUpperCase();
+
+          if(i>j){
+            return -1;
+          }
+          else if(i<j){
+              return 1;
+          }
+          else{
+            return 0
+          }
+        })
+      }
+
+      displayarr(arr)
+      
+    }
+      
+
+  </script>
+</html>
