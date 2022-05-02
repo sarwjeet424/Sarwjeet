@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend</title>
+    <link rel="stylesheet" href="csspart.css">
+</head>
+<body>
+    <div id="navboth">
+    <div><a href="backend.html" >Backend</a></div>
+    <div><a href="frontend.html" >Frontend</a></div>
+</div>
+    <form id="win">
+        <input id="hi" type="text" placeholder="ImgUrl">
+        <input id="hello" type="text" placeholder="Name">
+        <input id="bye" type="text" placeholder="role"> 
+        <input id="new" type="text" placeholder="LogoUrl">
+        <input  type="submit">
+
+    </form>
+   
+</body>
+</html>
+
+<script>
+        document.querySelector("form").addEventListener("submit",myhom)
+        var data=JSON.parse(localStorage.getItem("local"))||[]
+    function myhom(){
+        event.preventDefault()
+
+       var obj={
+                imgurl:win.hi.value,
+                names:win.hello.value,
+                position:win.bye.value,
+                logourl:win.new.value,
+               }
+
+       data.push(obj)
+       localStorage.setItem("local",JSON.stringify(data))
+
+    }
+</script>
+
