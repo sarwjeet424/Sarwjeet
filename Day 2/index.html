@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp Page</title>
+
+    <style>
+        form{
+           display: grid;
+           grid-template-columns: repeat(1,4fr);
+           width: 30%;
+           margin: auto;
+           margin-top: 80px;
+           gap:40px;
+        }
+        h1{
+            text-align: center;
+        }
+        form>input{
+            height: 40px;
+            padding-left: 15px;
+            font-size: 15px;
+        }
+        #sub{
+            border-radius: 7px;
+            width: 30%;
+            margin: auto;
+            padding: 0px;
+            cursor:pointer;
+        }
+        #sub:hover{
+             background-color: blue;
+             color: white;
+             border: 0px solid white;
+        }
+        a{
+            display: flex;
+            width: 90%;
+            justify-content:end;
+            font-size:  25px;
+            text-decoration: none;
+            margin-top: 40px;
+            margin-bottom: -50px;
+            color: blue;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="Login.html">Click For Login</a>
+    <h1>SignUp</h1>
+    <form id="form" >
+        <input id="nam" type="text" placeholder="Enter Your FullName">
+        <input id="emai" type="email" placeholder="Enter Email">
+        <input id="pass" type="password" placeholder="Enter Password">
+        <input id="sub" type="submit">
+    </form>
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit",mysub)
+    var arr = JSON.parse(localStorage.getItem("array"))||[]
+
+    function mysub(){
+        event.preventDefault()
+        var obj={
+            names:form.nam.value,
+            emails:form.emai.value,
+            passwords:form.pass.value,
+        }
+         alert("Signup Successfully")
+         window.location.href="Login.html"
+        
+        arr.push(obj)
+        localStorage.setItem("array",JSON.stringify(arr))
+       
+           
+        
+       
+    }
+</script>
